@@ -44,12 +44,20 @@ def main():
 
 
 
-        updatable.update(dt)
+        updatable.update(dt)  #update each object on the screen
 
-        for obj in asteroids:
+        for obj in asteroids:  # a loop for checking if asteroids are touching the player
             if obj.is_colliding(player):
                 print("Game Over!")
                 return
+            
+
+            for bullet in shots:  # looping through each shot for each asteroid
+                if obj.is_colliding(bullet):
+                    obj.kill()
+                    bullet.kill()
+
+
 
         for obj in drawable:      # draw the player. pass the screen as the surface to print it on
             obj.draw(screen)
